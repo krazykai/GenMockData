@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenMockData", "GenMockData.csproj", "{7FAAE1E1-F9AE-4911-8193-6CE7AF54BB18}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FAAE1E1-F9AE-4911-8193-6CE7AF54BB18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FAAE1E1-F9AE-4911-8193-6CE7AF54BB18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FAAE1E1-F9AE-4911-8193-6CE7AF54BB18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FAAE1E1-F9AE-4911-8193-6CE7AF54BB18}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6DAA6A56-455C-4CF5-9A9C-551E4B3F01C3}
+	EndGlobalSection
+EndGlobal
