@@ -20,6 +20,11 @@ namespace GenMockData.Controllers
             _openaiApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
         }
 
+        /// <summary>
+        /// Chat with OpenAI API
+        /// </summary>
+        /// <param name="content"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("openai")]
         public async Task<IActionResult> Chat([FromBody] string content)
