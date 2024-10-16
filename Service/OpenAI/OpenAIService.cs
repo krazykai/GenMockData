@@ -5,6 +5,13 @@ namespace GenMockData.Service.OpenAI
 {
     public class OpenAIService : IOpenAIService
     {
+        /// <summary>
+        /// Chat with OpenAI
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="httpClient"></param>
+        /// <param name="openaiApiKey"></param>
+        /// <returns> string </returns>
         public async Task<string> Chat(string content, HttpClient httpClient, string openaiApiKey)
         {
             OpenAIMessage openAIMessageSystem = new OpenAIMessage()
