@@ -24,6 +24,11 @@ namespace GenMockData.Service.GenMock
         }
 
 
+        /// <summary>
+        /// Generate mock data
+        /// </summary>
+        /// <param name="genMockRequest"></param>
+        /// <returns> string </returns>
         public async Task<string> GenMock(GenMockRequest genMockRequest)
         {
             int dataCount = genMockRequest.dataCount;
