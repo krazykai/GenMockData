@@ -23,7 +23,7 @@ namespace GenMockData.Controllers
         /// <returns> string </returns>
         [HttpPost]
         [Route("GenMockDataString")]
-        [SwaggerOperation(Summary = "Gen Mock Data", Description = "Gen Mock Data")]
+        [SwaggerOperation(Summary = "Generate Mock Data", Description = "Generate Mock Data")]
         public async Task<ActionResult<string>> GenMockDataString([FromBody] GenMockRequest genMockRequest)
         {
             try
