@@ -1,6 +1,7 @@
 ﻿using GenMockData.Model.GenMock;
 using GenMockData.Service.GenMock;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace GenMockData.Controllers
 {
@@ -21,7 +22,8 @@ namespace GenMockData.Controllers
         /// <param name="genMockRequest"></param>
         /// <returns> string </returns>
         [HttpPost]
-        [Route("dataString")]
+        [Route("GenMockDataString")]
+        [SwaggerOperation(Summary = "Gen Mock Data", Description = "Gen Mock Data")]
         public async Task<ActionResult<string>> GenMockDataString([FromBody] GenMockRequest genMockRequest)
         {
             try

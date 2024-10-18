@@ -1,5 +1,6 @@
 ﻿using GenMockData.Service.OpenAI;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace GenMockData.Controllers
 {
@@ -27,6 +28,7 @@ namespace GenMockData.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("openai")]
+        [SwaggerOperation(Summary = "Chat with OpenAI API", Description = "Chat with OpenAI API")]
         public async Task<IActionResult> Chat([FromBody] string content)
         {
             try
