@@ -27,7 +27,6 @@ namespace GenMockData.Controllers
         /// <param name="content"></param>
         /// <returns></returns>
         [HttpPost]
-        [Route("OpenAI")]
         [SwaggerOperation(Summary = "Chat with OpenAI API", Description = "Chat with OpenAI API")]
         public async Task<IActionResult> Chat([FromBody] string content)
         {
