@@ -32,7 +32,7 @@ namespace GenMockData.Controllers
         {
             try
             {
-                var jsonResponse = await _openAIService.Chat(content, _httpClient, _openaiApiKey);
+                string jsonResponse = await _openAIService.Chat(content, _httpClient, _openaiApiKey);
                 return Ok(jsonResponse);
             }
             catch (HttpRequestException ex)
