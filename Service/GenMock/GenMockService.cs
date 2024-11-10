@@ -2,6 +2,8 @@
 using GenMockData.Service.OpenAI;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System.Numerics;
+using System;
 using System.Runtime.InteropServices.JavaScript;
 using System.Text;
 using System.Text.Json.Nodes;
@@ -34,13 +36,18 @@ namespace GenMockData.Service.GenMock
             int dataCount = genMockRequest.dataCount;
             string genMockColumnString = await GetGenMockColumnString(genMockRequest.genMockColumnList);
             string format = genMockRequest.responseFormat;
+            string tableName = "";
 
             if (genMockRequest.responseFormat.ToLower() == "sql")
             {
-                format = "SQL 插入語句";
+                format = "SQL insert statements";
+            }
+            if (!string.IsNullOrEmpty(genMockRequest.tableName))
+            {
+                tableName = " for the table " + genMockRequest.tableName;
             }
 
-            string content = $" 請產生 {dataCount} 筆測試資料，欄位有 {genMockColumnString}，回傳的格式是 {format}。請直接回覆測試資料即可，不用加上其他對話內容。";
+            string content = $" Please generate {dataCount} rows of mock data {tableName} with the following fields: {genMockColumnString}. The response format should be {format} as a single string without formatting or line breaks. Only provide the mock data, without any additional dialogue or commentary.";
 
             var response = await _openAIService.Chat(content, _httpClient, _openaiApiKey);
 
@@ -88,7 +95,16 @@ namespace GenMockData.Service.GenMock
                     FileDownloadName = "mockData.json"
                 };
             }
+            else if (fileType.ToLower() == "sql")
+            {
+                byte[] byteArray = Encoding.UTF8.GetBytes(mockDataString);
+                MemoryStream stream = new MemoryStream(byteArray);
 
+                fileStreamResult = new FileStreamResult(stream, "application/sql")
+                {
+                    FileDownloadName = "mockData.sql"
+                };
+            }
 
             return fileStreamResult;
         }
