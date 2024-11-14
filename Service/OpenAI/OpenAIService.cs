@@ -5,14 +5,19 @@ namespace GenMockData.Service.OpenAI
 {
     public class OpenAIService : IOpenAIService
     {
+        private readonly OpenAIAPIHelper _openAIAPIHelper;
+
+        public OpenAIService(OpenAIAPIHelper openAIAPIHelper)
+        {
+            _openAIAPIHelper = openAIAPIHelper;
+        }
+
         /// <summary>
         /// Chat with OpenAI
         /// </summary>
         /// <param name="content"></param>
-        /// <param name="httpClient"></param>
-        /// <param name="openaiApiKey"></param>
         /// <returns> string </returns>
-        public async Task<string> Chat(string content, HttpClient httpClient, string openaiApiKey)
+        public async Task<string> Chat(string content)
         {
             OpenAIMessage openAIMessageSystem = new OpenAIMessage()
             {
@@ -28,8 +33,7 @@ namespace GenMockData.Service.OpenAI
             openAIMessages.Add(openAIMessageSystem);
             openAIMessages.Add(openAIMessageUser);
 
-            OpenAIAPIHelper openAIAPIHelper = new OpenAIAPIHelper(httpClient, openaiApiKey);
-            string? jsonResponse = await openAIAPIHelper.ChatWithOpenAI(openAIMessages);
+            string? jsonResponse = await _openAIAPIHelper.ChatWithOpenAI(openAIMessages);
 
             return jsonResponse;
         }
