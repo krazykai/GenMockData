@@ -13,16 +13,10 @@ namespace GenMockData.Service.GenMock
     public class GenMockService : IGenMockDataService
     {
         private readonly IOpenAIService _openAIService;
-        private readonly HttpClient _httpClient;
-        private readonly string _openaiApiKey;
 
-        public GenMockService(IOpenAIService openAIService, IHttpClientFactory httpClientFactory)
+        public GenMockService(IOpenAIService openAIService)
         {
             _openAIService = openAIService;
-
-            _httpClient = httpClientFactory.CreateClient();
-
-            _openaiApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
         }
 
 
@@ -49,7 +43,7 @@ namespace GenMockData.Service.GenMock
 
             string content = $" Please generate {dataCount} rows of mock data {tableName} with the following fields: {genMockColumnString}. The response format should be {format} as a single string without formatting or line breaks. Only provide the mock data, without any additional dialogue or commentary.";
 
-            var response = await _openAIService.Chat(content, _httpClient, _openaiApiKey);
+            var response = await _openAIService.Chat(content);
 
             if (response == null)
             {
@@ -84,7 +78,6 @@ namespace GenMockData.Service.GenMock
         {
             FileStreamResult fileStreamResult = null;
 
-
             if (fileType.ToLower() == "json")
             {
                 byte[] byteArray = System.Text.Encoding.UTF8.GetBytes(mockDataString);
@@ -97,9 +90,13 @@ namespace GenMockData.Service.GenMock
             }
             else if (fileType.ToLower() == "sql")
             {
+                // Convert the mock data string to a byte array using UTF-8 encoding
                 byte[] byteArray = Encoding.UTF8.GetBytes(mockDataString);
+
+                // Create a memory stream from the byte array
                 MemoryStream stream = new MemoryStream(byteArray);
 
+                // Create a FileStreamResult from the memory stream, setting the content type as SQL and specifying the download file name
                 fileStreamResult = new FileStreamResult(stream, "application/sql")
                 {
                     FileDownloadName = "mockData.sql"

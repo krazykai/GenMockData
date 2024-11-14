@@ -9,16 +9,10 @@ namespace GenMockData.Controllers
     public class OpenAIController : ControllerBase
     {
         private readonly IOpenAIService _openAIService;
-        private readonly HttpClient _httpClient;
-        private readonly string _openaiApiKey;
 
-        public OpenAIController(IOpenAIService openAIService, IHttpClientFactory httpClientFactory)
+        public OpenAIController(IOpenAIService openAIService)
         {
             _openAIService = openAIService;
-
-            _httpClient = httpClientFactory.CreateClient();
-
-            _openaiApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
         }
 
         /// <summary>
@@ -32,7 +26,7 @@ namespace GenMockData.Controllers
         {
             try
             {
-                string jsonResponse = await _openAIService.Chat(content, _httpClient, _openaiApiKey);
+                string jsonResponse = await _openAIService.Chat(content);
                 return Ok(jsonResponse);
             }
             catch (HttpRequestException ex)

@@ -2,6 +2,6 @@
 {
     public interface IOpenAIService
     {
-        Task<string> Chat(string content, HttpClient httpClient, string openaiApiKey);
+        Task<string> Chat(string content);
     }
 }

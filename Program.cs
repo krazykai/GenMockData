@@ -1,3 +1,4 @@
+using GenMockData.Helper;
 using GenMockData.Service.GenMock;
 using GenMockData.Service.OpenAI;
 
@@ -32,6 +33,7 @@ var openaiApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
 // Add services to the container.
 builder.Services.AddScoped<IOpenAIService, OpenAIService>();
 builder.Services.AddScoped<IGenMockDataService, GenMockService>();
+builder.Services.AddTransient<OpenAIAPIHelper>();
 
 // Register IHttpClientFactory
 builder.Services.AddHttpClient();
