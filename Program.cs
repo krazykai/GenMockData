@@ -29,14 +29,18 @@ if (File.Exists(env))
 var openaiApiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
 
 
+// Register IHttpClientFactory
+builder.Services.AddHttpClient();
 
 // Add services to the container.
 builder.Services.AddScoped<IOpenAIService, OpenAIService>();
 builder.Services.AddScoped<IGenMockDataService, GenMockService>();
-builder.Services.AddTransient<OpenAIAPIHelper>();
 
-// Register IHttpClientFactory
-builder.Services.AddHttpClient();
+// 將 OpenAIAPIHelper 的註冊方式使用 AddHttpClient，以便正確管理 HttpClient 的生命週期。
+// 使用 AddHttpClient 可以重複用同一個 HttpClient 實例，避免頻繁建立新的 HttpClient 實例，而浪費系統資源，提升高頻率 HTTP 請求時的效能。
+builder.Services.AddHttpClient<OpenAIAPIHelper>();
+
+
 
 // Add services to the container.
 builder.Services.AddControllers();
